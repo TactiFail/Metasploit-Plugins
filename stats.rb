@@ -24,8 +24,8 @@ class Plugin::Stats < Msf::Plugin
     # Print top X ports by count (default top 10)
     def cmd_top_ports(count = 10)
       print_line("Top #{count} open ports:")
-      print_line("Port  | Count")
-      print_line("-------------")
+      print_line("Rank  | Port  | Count")
+      print_line("---------------------")
 
       # Generate port list in descending order of frequency
       services = self.framework.db.workspace.services.where(state: "open")
@@ -38,7 +38,7 @@ class Plugin::Stats < Msf::Plugin
       # Display table of results
       i = 1
       top.each do |k,v|
-        print_line("#{k}".ljust(5, " ") + " | #{v}")
+        print_line("\##{i}".ljust(5, " ") + " | "  + "#{k}".ljust(5, " ") + " | #{v}")
         break if i == count.to_i
         i += 1
       end
