@@ -24,8 +24,8 @@ class Plugin::Stats < Msf::Plugin
     # Print top X ports by count (default top 10)
     def cmd_top_ports(num = 10)
       print_line("Top #{num} open ports:")
-      print_line("Rank  | Port  | Count | Exploit?")
-      print_line("--------------------------------")
+      print_line("Rank  | Port  | Count | Module?")
+      print_line("-------------------------------")
 
       # Generate port list in descending order of frequency
       services = self.framework.db.workspace.services.where(state: "open")
@@ -38,11 +38,11 @@ class Plugin::Stats < Msf::Plugin
       # Display table of results
       i = 1
       top.each do |port,count|
-        has_exploit = Msf::Modules::Metadata::Cache.instance.find(
+        has_module = Msf::Modules::Metadata::Cache.instance.find(
           {"port"=>[[port.to_s], []]}
         ).count > 0 ? "Yes" : "No"
-        #next if has_exploit == "No"
-        print_line("\##{i}".ljust(5, " ") + " | "  + "#{port}".ljust(5, " ") + " | " + "#{count}".ljust(5, " ") + " | " + has_exploit)
+        #next if has_module == "No"
+        print_line("\##{i}".ljust(5, " ") + " | "  + "#{port}".ljust(5, " ") + " | " + "#{count}".ljust(5, " ") + " | " + has_module)
         break if i == num.to_i
         i += 1
       end
