@@ -1,6 +1,6 @@
 # Metasploit-Plugins
 
-A collection of Metasploit plugins I have written for various reasons.
+A collection of Metasploit plugins I have written for various reasons. To use, simply download the plugin of your choice into your Metasploit's `plugins` folder (typically `/usr/share/metasploit-framework/plugins/`) and run `load $plugin` e.g. `load stats`.
 
 ## Overview
 
